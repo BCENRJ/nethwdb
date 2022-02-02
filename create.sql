@@ -47,33 +47,3 @@ create table if not exists music.track_collection (
     track_id integer not null references music.track(id),
     collection_id integer not null references music.collection(id)
 );
-
--- second schema
-
-create schema if not exists employees;
-
-create table if not exists employees.employer (
-  id serial primary key,
-  employer_name varchar(65)
-);
-
-create table if not exists employees.employee (
-    id serial primary key,
-    employee_name varchar(50),
-    dept_name varchar(65),
-    employer_id integer references employees.employer(id)
-
-);
-
-create table if not exists employees.department (
-    id serial primary key,
-    dept_name varchar(65)
-);
-
-
-create table if not exists employees.EmDeEmp (
-    employee_id integer references employees.employee(id),
-    department_id integer references employees.department(id),
-    employer_id integer references employees.employer(id),
-    constraint pk primary key (employee_id, department_id, employer_id)
-);
