@@ -33,7 +33,7 @@ create table if not exists music.track (
     id serial primary key,
     name varchar(75),
     duration_m numeric(3, 2) check (duration_m > 0),
-    album_id integer references music.album(id) unique
+    album_id integer not null references music.album(id)
 );
 
 create table if not exists music.collection (
@@ -52,9 +52,17 @@ create table if not exists music.track_collection (
 
 create schema if not exists employees;
 
+create table if not exists employees.employer (
+  id serial primary key,
+  employer_name varchar(65)
+);
+
 create table if not exists employees.employee (
     id serial primary key,
-    employee_name varchar(50)
+    employee_name varchar(50),
+    dept_name varchar(65),
+    employer_id integer references employees.employer(id)
+
 );
 
 create table if not exists employees.department (
@@ -62,10 +70,6 @@ create table if not exists employees.department (
     dept_name varchar(65)
 );
 
-create table if not exists employees.employer (
-  id serial primary key,
-  employer_name varchar(65)
-);
 
 create table if not exists employees.EmDeEmp (
     employee_id integer references employees.employee(id),
