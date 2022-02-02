@@ -33,7 +33,7 @@ create table if not exists music.track (
     id serial primary key,
     name varchar(75),
     duration_m numeric(3, 2) check (duration_m > 0),
-    album_id integer references music.album(id)
+    album_id integer not null references music.album(id)
 );
 
 create table if not exists music.collection (
